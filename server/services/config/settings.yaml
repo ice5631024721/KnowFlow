@@ -14,13 +14,13 @@ app:
   # 开发模式
   # true: 启用开发模式，跳过某些耗时步骤，输出更详细的日志。
   # false: 生产模式。
-  dev_mode: true
+  dev_mode: false
 
   # 临时文件清理
   # true: 在处理完成后自动清理临时文件（如上传的原始文件、中间文件）。
   # false: 保留临时文件，便于调试。
   # 注意：在开发模式下，此项默认为 false，但仍可被环境变量覆盖。
-  cleanup_temp_files: false
+  cleanup_temp_files: true
 
   # 全局分块方法
   # 'smart': 智能分块，基于AST的语义分块（默认推荐）。
@@ -57,3 +57,47 @@ excel:
 
   # 是否在HTML分块中尽量保持表格结构
   preserve_table_structure: true
+
+# =======================================================
+# MinerU 文档解析配置 (客户端配置)
+# =======================================================
+mineru:
+  # FastAPI 客户端配置
+  fastapi:
+    # FastAPI 服务地址
+    # 本地开发: http://localhost:8888
+    # Docker部署: http://host.docker.internal:8888 (Docker Desktop)
+    #           或 http://宿主机IP:8888 (Linux Docker)
+    #           或 http://mineru-api:8888 (Docker Compose网络)
+    url: "http://localhost:8888"
+    
+    # HTTP 请求超时时间（秒）
+    timeout: 30000
+  
+  # 默认使用的后端类型
+  # 选项: pipeline, vlm-transformers,  vlm-sglang-client
+  default_backend: "pipeline"
+  
+  # Pipeline 后端请求参数
+  pipeline:
+    # 解析方法: auto, txt, ocr
+    parse_method: "auto"
+    
+    # 文档语言（提升OCR准确率）
+    lang: "ch"
+    
+    # 是否启用公式解析
+    formula_enable: true
+    
+    # 是否启用表格解析
+    table_enable: true
+  
+  # VLM 后端配置
+  vlm:
+    sglang:
+      # SGLang 服务器地址（vlm-sglang-client 后端需要）
+      # Docker部署时同样需要使用宿主机IP或容器网络地址
+      server_url: "http://host.docker.internal:30000"
+
+
+
