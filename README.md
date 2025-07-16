@@ -7,6 +7,23 @@
 KnowFlow 是一个基于 RAGFlow 的开源项目，持续兼容 RAGFlow 官方版本，同时会将社区里做的比较好的最佳实践整合进来。
 KnowFlow 可以理解成 RAGFlow 官方开源产品真正落地企业场景的最后一公里服务。
 
+---
+
+### 🚀 项目亮点
+
+<div align="center">
+
+| 🌟 | **KnowFlow 优势** |
+|----|-------------------|
+| 🔌 | **插件化架构**：无缝兼容 RAGFlow 任意版本，所有增强均可热插拔，升级无忧 |
+| 🛡️ | **零入侵增强**：通过 Plugin & Patch 机制，增强 RAGFlow 而不破坏原生代码 |
+| 🧩 | **分块策略丰富**：支持多种分块算法，检索更精准，适配多场景文档 |
+| 🏢 | **企业级特性**：MinerU2.x OCR 引擎、团队/用户/权限管理、企业微信、LDAP/SSO（开发中） |
+| 📈 | **最佳实践集成**：持续吸收社区优质方案，助力企业高效落地 |
+
+</div>
+
+
 ## 功能介绍
 
 ### 适配 RAGFlow 全新 UI
@@ -36,7 +53,7 @@ KnowFlow 可以理解成 RAGFlow 官方开源产品真正落地企业场景的�
 ### 图文混排输出
 
 1. 支持市面上常见的文件格式，如 ppt/png/word/doc/excel/...等等
-2. 保持和官方 markdown **完全一致**的分块规则，共提供了三种分块策略，保证分块和向量化检索效果，且具备开放性，后续可持续增强
+2. 保持和官方 markdown **完全一致**的分块规则，共提供了三种分块策略:文档结构分块、按标题分块、RAGFlow 原分块
 3. 无缝对接 RAGFlow 知识库系统，文档自动解析和分块
 
 <div align="center">
@@ -52,6 +69,7 @@ KnowFlow 可以理解成 RAGFlow 官方开源产品真正落地企业场景的�
 </div>
 
 ## 使用方式
+
 
 ### 0. MinerU 本地调试（开发环境）
 
@@ -134,13 +152,10 @@ mineru:
 
 3. 完善 `.env` 文件配置
 
-   安装脚本会自动创建 `.env` 文件模板，您只需要填写两个必要信息：
+   安装脚本会自动创建 `.env` 文件模板，您只需要填写必要信息：
 
    ```bash
-   # 从 RAGFlow API 页面后台获取 (必须手动填写)
-   RAGFLOW_API_KEY=你的实际API密钥
-
-   # 确认端口号并替换 (通常RAGFlow默认端口是80或8080)
+   # RAGFlow 服务地址 (必须手动填写)
    RAGFLOW_BASE_URL=http://检测到的IP:实际端口号
    ```
 
@@ -340,10 +355,9 @@ mineru:
        ports:
          - "5000:5000"
        environment:
-         - RAGFLOW_API_KEY=${RAGFLOW_API_KEY}
          - RAGFLOW_BASE_URL=${RAGFLOW_BASE_URL}
          - DB_HOST=${DB_HOST}
-         - MYSQL_PORT=3306  # 注意是 3306 端口
+         - MYSQL_PORT=3306 
          - MINIO_HOST=${MINIO_HOST}
          - ES_HOST=${ES_HOST}
          - ES_PORT=${ES_PORT}
@@ -375,7 +389,6 @@ mineru:
    
    ```bash
    # RAGFlow API 配置
-   RAGFLOW_API_KEY=ragflow-JmZjZlOGU2NWM4ZjExZjBhNGZmY2U4MD
    RAGFLOW_BASE_URL=http://8.134.177.47:15002
 
    # 通过 RAGFlow 网络连接的服务地址
